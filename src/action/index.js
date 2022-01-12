@@ -28,6 +28,11 @@ export const archiveNote = (created) => ({
   created,
 });
 
+export const unarchiveNote = (created) => ({
+  type: "UNARCHIVE_NOTE",
+  created,
+});
+
 export const deleteNote = (created) => ({
   type: "DELETE_NOTE",
   created,
@@ -39,4 +44,8 @@ export const deleteAllNotes = () => ({
 
 export const archiveAllNotes = () => ({
   type: "ARCHIVE_ALL_NOTES",
+});
+
+export const unarchiveAllNotes = () => ({
+  type: "UNARCHIVE_ALL_NOTES",
 });

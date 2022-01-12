@@ -47,6 +47,7 @@ function Notes() {
   };
 
   let editNoteCreated, editNoteName, editNoteCategory, editNoteContent;
+
   let handleEdit = (event) => {
     let currentId = event.target.parentNode.parentNode.parentNode.id;
     let currentNote = activeNotes.filter(

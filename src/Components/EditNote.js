@@ -6,12 +6,12 @@ function EditNote(props) {
   // const [category, setCategory] = useState(props.category);
   console.log(props);
   return (
-    <form className="edit-form">
+    <form className="edit-form hide">
       <h2>Edit note</h2>
       <div className="edit-value">
         <label>Note type: </label>
         <select name="category" required="required" id="edit-category">
-          <option value="">{category}</option>
+          <option value="">{props.category}</option>
           <option value="task">Task</option>
           <option value="thought">Random thought</option>
           <option value="idea">Idea</option>

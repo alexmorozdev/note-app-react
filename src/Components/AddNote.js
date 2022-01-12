@@ -3,10 +3,12 @@ import { addNewNote } from "../action/index";
 
 function AddNote() {
   let handleAddNoteButtom = (event) => {
-    event.target.parentElement.children[1].classList.remove("hide");
+    event.target.parentElement.parentElement.children[1].classList.remove(
+      "hide"
+    );
     console.log("Add note button");
     console.log(event);
-    console.log(event.target.parentElement.children[1].classList);
+    console.log(event.target.parentElement.parentElement.children[1].classList);
   };
 
   const dispatch = useDispatch();
@@ -34,9 +36,11 @@ function AddNote() {
 
   return (
     <div>
-      <button className="buttom create-note" onClick={handleAddNoteButtom}>
-        Create Note
-      </button>
+      <div className="action-button">
+        <button className="buttom" onClick={handleAddNoteButtom}>
+          Create Note
+        </button>
+      </div>
       <form onSubmit={formHandler} className="edit-form hide">
         <h2>Add note</h2>
         <div>
@@ -56,7 +60,7 @@ function AddNote() {
           <label>Note text: </label>
           <textarea name="content"></textarea>
         </div>
-        <div className="form-footer">
+        <div className="action-button">
           <button className="buttom" type="submit">
             Add
           </button>
