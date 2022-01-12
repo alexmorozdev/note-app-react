@@ -14,6 +14,24 @@ export const addNewNote = (
   dates,
   status,
 });
+export const editNote = (created, name, category, content, dates) => ({
+  type: "EDIT_NOTE",
+  created,
+  name,
+  category,
+  content,
+  dates,
+});
+
+export const archiveNote = (created) => ({
+  type: "ARCHIVE_NOTE",
+  created,
+});
+
+export const deleteNote = (created) => ({
+  type: "DELETE_NOTE",
+  created,
+});
 
 export const deleteAllNotes = () => ({
   type: "DELETE_ALL_NOTES",

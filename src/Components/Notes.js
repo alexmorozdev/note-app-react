@@ -1,3 +1,5 @@
+import EditNote from "./EditNote";
+
 import {
   Edit,
   Delete,
@@ -8,13 +10,20 @@ import {
   Comment,
   Flag,
 } from "@material-ui/icons";
+
 import { useSelector, useDispatch } from "react-redux";
-import { deleteAllNotes, archiveAllNotes } from "../action/index";
+import {
+  archiveNote,
+  deleteNote,
+  deleteAllNotes,
+  archiveAllNotes,
+} from "../action/index";
 
 function Notes() {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.notes);
-  console.log(notes);
+  const activeNotes = notes.filter((elem) => elem.status === "active");
+  console.log(activeNotes);
   const icons = {
     "Random thought": <Flag />,
     Task: <ShoppingCart />,
@@ -34,24 +43,31 @@ function Notes() {
   };
 
   let handleArchiveAll = () => {
-    console.log("Archive All");
-    dispatch(archiveAllNotes("archive"));
+    dispatch(archiveAllNotes());
   };
 
-  let handleEdit = () => {
+  let editNoteCreated, editNoteName, editNoteCategory, editNoteContent;
+  let handleEdit = (event) => {
+    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    let currentNote = activeNotes.filter(
+      (elem) => elem.created === currentId
+    )[0];
+    editNoteCreated = currentNote.created;
+    editNoteName = currentNote.name;
+    editNoteCategory = currentNote.category;
+    editNoteContent = currentNote.content;
     console.log("Edit");
   };
 
-  let handleArchive = () => {
-    console.log("Archive");
+  let handleArchive = (event) => {
+    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    console.log(currentId);
+    dispatch(archiveNote(currentId));
   };
 
-  let handleDelete = () => {
-    console.log("Delete");
-  };
-
-  let handleAddNoteButtom = () => {
-    console.log("Add note");
+  let handleDelete = (event) => {
+    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    dispatch(deleteNote(currentId));
   };
 
   return (
@@ -77,8 +93,8 @@ function Notes() {
           </tr>
         </thead>
         <tbody className="table-body">
-          {notes.map((elem) => (
-            <tr key={elem.created}>
+          {activeNotes.map((elem) => (
+            <tr key={elem.created + elem.category} id={elem.created}>
               <td>{icons[elem.category]}</td>
               <td>{elem.name}</td>
               <td>{dateFromUnixTime(+elem.created)}</td>
@@ -86,32 +102,26 @@ function Notes() {
               <td>{elem.content}</td>
               <td>{elem.dates}</td>
               <td>
-                <Edit onClick={handleEdit} />
+                <Edit name={elem.created} onClick={handleEdit} />
               </td>
               <td>
-                <Archive onClick={handleArchive} />
+                <Archive name={elem.created} onClick={handleArchive} />
               </td>
               <td>
-                <Delete onClick={handleDelete} />
+                <Delete name={elem.created} onClick={handleDelete} />
               </td>
             </tr>
           ))}
         </tbody>
-        <tfoot>
-          <tr>
-            <td colSpan="9">
-              <button
-                className="buttom create-note"
-                onClick={handleAddNoteButtom}
-              >
-                Create Note
-              </button>
-            </td>
-          </tr>
-        </tfoot>
       </table>
-
-      <p></p>
+      <div className="edit-note ">
+        <EditNote
+          created={editNoteCreated}
+          name={editNoteName}
+          category={editNoteCategory}
+          content={editNoteContent}
+        />
+      </div>
     </div>
   );
 }

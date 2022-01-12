@@ -15,19 +15,47 @@ const noteReducers = (state = initialState.notes, action) => {
           status: action.status,
         },
       ];
+    case "EDIT_NOTE":
+      console.log("we edit note");
+      return [
+        ...state.map((elem) =>
+          elem.created === action.created
+            ? {
+                ...elem,
+                name: action.name,
+                category: action.category,
+                content: action.content,
+                dates: action.dates,
+              }
+            : elem
+        ),
+      ];
+    case "ARCHIVE_NOTE": {
+      console.log("we archive one note from store");
+      console.log(action.created);
+      return [
+        ...state.map((elem) =>
+          elem.created === action.created
+            ? { ...elem, status: "archive" }
+            : elem
+        ),
+      ];
+    }
+    case "DELETE_NOTE": {
+      console.log("we delete one note from store");
+      return [...state.filter((elem) => elem.created !== action.created)];
+    }
     case "DELETE_ALL_NOTES": {
       console.log("we delete all notes from store");
       return [];
     }
     case "ARCHIVE_ALL_NOTES": {
       console.log("we archive all notes from store");
-      let newState = state.slice();
-      console.log(newState);
-      for (let i = 0; i < newState.length; i++) {
-        newState[i].status = "archive";
-      }
-      console.log(newState);
-      return [...state, state.map(elem => {...elem, elem.status = 'archive'})];
+      return [
+        ...state.map((elem) =>
+          elem.status === "active" ? { ...elem, status: "archive" } : elem
+        ),
+      ];
     }
     default:
       return state;

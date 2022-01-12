@@ -73,7 +73,7 @@ tfoot {
 
 .buttom {
   float: right;
-  margin: 5px 20px;
+  margin: 5px 150px;
   border-radius: 5px;
 }
 
@@ -123,6 +123,9 @@ textarea {
   td {
     padding: 5px;
   }
+  .buttom {
+    margin: 5px 100px;
+  }
 }
 
 @media (max-width: 700px) {
@@ -139,5 +142,8 @@ textarea {
   th,
   td {
     padding: 5px 3px;
+  }
+  .buttom {
+    margin: 5px 50px;
   }
 }
