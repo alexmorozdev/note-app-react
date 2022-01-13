@@ -27,7 +27,7 @@ function EditNote() {
   };
 
   return (
-    <form onSubmit={formHandler} className={editNote.category ? "" : "hide"}>
+    <form onSubmit={formHandler} className={editNote.category ? "" : ""}>
       <h2>Edit note</h2>
       <div className="edit-value">
         <label>Note type: </label>
@@ -44,17 +44,12 @@ function EditNote() {
           required="required"
           type="text"
           name="name"
-          id="edit-name"
           defaultValue={editNote.name}
         ></input>
       </div>
       <div>
         <label>Note text: </label>
-        <textarea
-          name="content"
-          id="edit-content"
-          defaultValue={editNote.content}
-        ></textarea>
+        <textarea name="content" defaultValue={editNote.content}></textarea>
       </div>
       <div>
         <button className="buttom" type="submit">

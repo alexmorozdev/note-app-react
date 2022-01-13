@@ -1,5 +1,3 @@
-import EditNote from "./EditNote";
-
 import {
   Edit,
   Delete,
@@ -10,6 +8,7 @@ import {
   Comment,
   Flag,
 } from "@material-ui/icons";
+import EditNote from "./EditNote";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -24,7 +23,6 @@ function Notes() {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.notes);
   const activeNotes = notes.filter((elem) => elem.status === "active");
-  // console.log(activeNotes);
   const icons = {
     "Random thought": <Flag />,
     Task: <ShoppingCart />,
@@ -48,7 +46,7 @@ function Notes() {
   };
 
   let handleEdit = (event) => {
-    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    let currentId = event.target.getAttribute("name");
     let currentNote = activeNotes.filter(
       (elem) => elem.created === currentId
     )[0];
@@ -63,12 +61,12 @@ function Notes() {
   };
 
   let handleArchive = (event) => {
-    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    let currentId = event.target.getAttribute("name");
     dispatch(archiveNote(currentId));
   };
 
   let handleDelete = (event) => {
-    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    let currentId = event.target.getAttribute("name");
     dispatch(deleteNote(currentId));
   };
 

@@ -3,18 +3,13 @@ import { useSelector } from "react-redux";
 
 function NoteStatus() {
   const notes = useSelector((state) => state.notes);
-  const activeNotes = notes.filter((elem) => elem.status === "active");
-  const archiveNotes = notes.filter((elem) => elem.status === "archive");
-  const activeTasks = activeNotes.filter((elem) => elem.category === "Task");
-  const activeIdeas = activeNotes.filter((elem) => elem.category === "Idea");
-  const activeThoughts = activeNotes.filter(
-    (elem) => elem.category === "Random thought"
-  );
-  const archiveTasks = archiveNotes.filter((elem) => elem.category === "Task");
-  const archiveIdeas = archiveNotes.filter((elem) => elem.category === "Idea");
-  const archiveThoughts = archiveNotes.filter(
-    (elem) => elem.category === "Random thought"
-  );
+  let noteCount = (status, category) => {
+    return notes.reduce(function (acc, item) {
+      return item.status === status && item.category === category
+        ? acc + 1
+        : acc;
+    }, 0);
+  };
 
   return (
     <div className="archive">
@@ -34,24 +29,24 @@ function NoteStatus() {
               <ShoppingCart />
             </td>
             <td>Task</td>
-            <td>{activeTasks.length}</td>
-            <td>{archiveTasks.length}</td>
+            <td>{noteCount("active", "Task")}</td>
+            <td>{noteCount("archive", "Task")}</td>
           </tr>
           <tr>
             <td>
               <Comment />
             </td>
             <td>Idea</td>
-            <td>{activeIdeas.length}</td>
-            <td>{archiveIdeas.length}</td>
+            <td>{noteCount("active", "Idea")}</td>
+            <td>{noteCount("archive", "Idea")}</td>
           </tr>
           <tr>
             <td>
               <Flag />
             </td>
             <td>Random thought</td>
-            <td>{activeThoughts.length}</td>
-            <td>{archiveThoughts.length}</td>
+            <td>{noteCount("active", "Random thought")}</td>
+            <td>{noteCount("archive", "Random thought")}</td>
           </tr>
         </tbody>
       </table>
