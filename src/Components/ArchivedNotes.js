@@ -15,6 +15,7 @@ import {
   deleteNote,
   deleteAllNotes,
   unarchiveAllNotes,
+  editNote,
 } from "../action/index";
 
 function ArchivedNotes() {
@@ -34,8 +35,20 @@ function ArchivedNotes() {
     dispatch(unarchiveAllNotes());
   };
 
-  let handleEdit = (event) => {
-    console.log("edit");
+  let handleEditArchive = (event) => {
+    let currentId = event.target.parentNode.parentNode.parentNode.id;
+    let currentNote = archiveNotes.filter(
+      (elem) => elem.created === currentId
+    )[0];
+    dispatch(
+      editNote(
+        currentNote.name,
+        currentNote.created,
+        currentNote.category,
+        currentNote.content
+      )
+    );
+    console.log("Edit");
   };
 
   let handleUnarchive = (event) => {
@@ -50,7 +63,7 @@ function ArchivedNotes() {
   };
 
   return (
-    <div className="archived-notes">
+    <div className={archiveNotes.length ? "" : "hide"}>
       <h2>Archived notes</h2>
       <table className="archived-notes-table">
         <thead>
@@ -74,7 +87,7 @@ function ArchivedNotes() {
               <td>{elem.name}</td>
               <td>{elem.category}</td>
               <td>
-                <Edit name={elem.created} onClick={handleEdit} />
+                <Edit name={elem.created} onClick={handleEditArchive} />
               </td>
               <td>
                 <Archive name={elem.created} onClick={handleUnarchive} />

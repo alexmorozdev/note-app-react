@@ -15,14 +15,15 @@ const noteReducers = (state = initialState.notes, action) => {
           status: action.status,
         },
       ];
-    case "EDIT_NOTE":
-      console.log("we edit note");
+    case "ADD_EDIT_NOTE": {
+      console.log("we add new note");
       return [
         ...state.map((elem) =>
           elem.created === action.created
             ? {
                 ...elem,
                 name: action.name,
+                created: action.created,
                 category: action.category,
                 content: action.content,
                 dates: action.dates,
@@ -30,9 +31,8 @@ const noteReducers = (state = initialState.notes, action) => {
             : elem
         ),
       ];
+    }
     case "ARCHIVE_NOTE": {
-      console.log("we archive one note");
-      console.log(action.created);
       return [
         ...state.map((elem) =>
           elem.created === action.created
@@ -42,8 +42,6 @@ const noteReducers = (state = initialState.notes, action) => {
       ];
     }
     case "UNARCHIVE_NOTE": {
-      console.log("we unarchive one note");
-      console.log(action.created);
       return [
         ...state.map((elem) =>
           elem.created === action.created ? { ...elem, status: "active" } : elem
@@ -51,15 +49,12 @@ const noteReducers = (state = initialState.notes, action) => {
       ];
     }
     case "DELETE_NOTE": {
-      console.log("we delete one note");
       return [...state.filter((elem) => elem.created !== action.created)];
     }
     case "DELETE_ALL_NOTES": {
-      console.log("we delete all notes");
       return [];
     }
     case "ARCHIVE_ALL_NOTES": {
-      console.log("we archive all notes");
       return [
         ...state.map((elem) =>
           elem.status === "active" ? { ...elem, status: "archive" } : elem
@@ -67,7 +62,6 @@ const noteReducers = (state = initialState.notes, action) => {
       ];
     }
     case "UNARCHIVE_ALL_NOTES": {
-      console.log("we unarchive all notes");
       return [
         ...state.map((elem) =>
           elem.status === "archive" ? { ...elem, status: "active" } : elem

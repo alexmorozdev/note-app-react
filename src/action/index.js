@@ -14,13 +14,26 @@ export const addNewNote = (
   dates,
   status,
 });
-export const editNote = (created, name, category, content, dates) => ({
-  type: "EDIT_NOTE",
-  created,
+
+export const addEditNote = (name, created, category, content, dates) => ({
+  type: "ADD_EDIT_NOTE",
   name,
+  created,
   category,
   content,
   dates,
+});
+
+export const editNote = (name, created, category, content) => ({
+  type: "EDIT_NOTE",
+  name,
+  created,
+  category,
+  content,
+});
+
+export const cleanEditNote = () => ({
+  type: "CLEAN_EDIT_NOTE",
 });
 
 export const archiveNote = (created) => ({

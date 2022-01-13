@@ -17,13 +17,14 @@ import {
   deleteNote,
   deleteAllNotes,
   archiveAllNotes,
+  editNote,
 } from "../action/index";
 
 function Notes() {
   const dispatch = useDispatch();
   const notes = useSelector((state) => state.notes);
   const activeNotes = notes.filter((elem) => elem.status === "active");
-  console.log(activeNotes);
+  // console.log(activeNotes);
   const icons = {
     "Random thought": <Flag />,
     Task: <ShoppingCart />,
@@ -46,23 +47,23 @@ function Notes() {
     dispatch(archiveAllNotes());
   };
 
-  let editNoteCreated, editNoteName, editNoteCategory, editNoteContent;
-
   let handleEdit = (event) => {
     let currentId = event.target.parentNode.parentNode.parentNode.id;
     let currentNote = activeNotes.filter(
       (elem) => elem.created === currentId
     )[0];
-    editNoteCreated = currentNote.created;
-    editNoteName = currentNote.name;
-    editNoteCategory = currentNote.category;
-    editNoteContent = currentNote.content;
-    console.log("Edit");
+    dispatch(
+      editNote(
+        currentNote.name,
+        currentNote.created,
+        currentNote.category,
+        currentNote.content
+      )
+    );
   };
 
   let handleArchive = (event) => {
     let currentId = event.target.parentNode.parentNode.parentNode.id;
-    console.log(currentId);
     dispatch(archiveNote(currentId));
   };
 
@@ -72,9 +73,8 @@ function Notes() {
   };
 
   return (
-    <div className="Notes">
+    <>
       <h2>Actual notes</h2>
-
       <table className="notes-table">
         <thead>
           <tr id="all-content">
@@ -116,14 +116,9 @@ function Notes() {
         </tbody>
       </table>
       <div className="edit-note ">
-        <EditNote
-          created={editNoteCreated}
-          name={editNoteName}
-          category={editNoteCategory}
-          content={editNoteContent}
-        />
+        <EditNote />
       </div>
-    </div>
+    </>
   );
 }
 

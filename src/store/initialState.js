@@ -58,6 +58,12 @@ const initialState = {
       status: "active",
     },
   ],
+  editNote: {
+    name: "",
+    created: "",
+    category: "",
+    content: "",
+  },
 };
 
 export default initialState;

@@ -6,13 +6,12 @@ import AddNote from "../Components/AddNote";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Notes</h1>
+    <>
       <Notes />
       <AddNote />
       <NoteStatus />
       <ArchivedNotes />
-    </div>
+    </>
   );
 }
 

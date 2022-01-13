@@ -16,7 +16,6 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 5px;
   padding: 10px;
   text-align: center;
 }
@@ -36,7 +35,7 @@ h6 {
   max-width: 1000px;
   min-width: 80%;
   table-layout: fixed;
-  margin: 20px auto;
+  margin: 10px auto;
   border: solid 1px white;
   border-radius: 5px;
   border-collapse: collapse;
@@ -45,18 +44,9 @@ thead {
   border-radius: 10px;
 }
 
-tbody {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-tr {
-  overflow: hidden;
-}
-
 th {
   background-color: gray;
-  margin: 5px 10px;
+  margin: 3px 10px;
   padding: 5px 10px;
   color: white;
 }
@@ -77,14 +67,14 @@ tfoot {
 }
 
 .buttom {
-  margin: 5px;
+  margin: 3px;
   border-radius: 5px;
 }
 
 form {
   width: 50%;
   /* height: 65vh; */
-  margin: 20px auto;
+  margin: 10px auto;
   align-items: center;
   justify-content: center;
   padding: 20px;

@@ -2,18 +2,15 @@ import { useDispatch } from "react-redux";
 import { addNewNote } from "../action/index";
 
 function AddNote() {
+  const dispatch = useDispatch();
+
   let handleAddNoteButtom = (event) => {
     event.target.parentElement.parentElement.children[1].classList.remove(
       "hide"
     );
-    console.log("Add note button");
-    console.log(event);
-    console.log(event.target.parentElement.parentElement.children[1].classList);
   };
 
-  const dispatch = useDispatch();
   const formHandler = (event) => {
-    console.log(event.target.classList);
     event.preventDefault();
     let data = event.target;
     let name = data.name.value;
@@ -46,10 +43,10 @@ function AddNote() {
         <div>
           <label>Note type: </label>
           <select name="category" required="required">
-            <option value="">Choose a note type</option>
-            <option value="Task">Task</option>
-            <option value="Random thought">Random thought</option>
-            <option value="Idea">Idea</option>
+            <option defaultValue="">Choose a note type</option>
+            <option defaultValue="Task">Task</option>
+            <option defaultValue="Random thought">Random thought</option>
+            <option defaultValue="Idea">Idea</option>
           </select>
         </div>
         <div>
